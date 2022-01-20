@@ -1,7 +1,7 @@
-## This project is no longer maintained
+# This project is no longer maintained
+
 
 ##libhrtime
-
 
 libhrtime, Version 0.6.1
 High-Resolution Process Timing for the Linux Kernel
@@ -27,6 +27,7 @@ another process.
 
 The library interface to get high-resolution timing information is:
 
+```
 int get_hrtime_struct(pid_t pid, volatile struct hrtime_struct **dest);
   Map the given timing page.
 
@@ -46,24 +47,28 @@ void get_hrutime(volatile struct hrtime_struct *hr, hrtime_t *dest);
 void get_hrstime(volatile struct hrtime_struct *hr, hrtime_t *dest);
   Get the total virtualized system time in ticks (only if CONFIG_HRUSTIME was
   enabled)
+```
 
-TODO/BUGS:
-Run some test cases to see what the cumulative slowdown (in cycles per syscall)
+###TODO/BUGS:
+
+- Run some test cases to see what the cumulative slowdown (in cycles per syscall)
 when CONFIG_HRUSTIME is enabled.
 
-Compute the timestamp difference between multiple CPUs in SMP boxes, and
+- Compute the timestamp difference between multiple CPUs in SMP boxes, and
 do all hrtime (wall time) operations with reference to CPU 0.
 
-Add support for other architectures.
+- Add support for other architectures.
 
-Figure out what to do with threaded programs.
+- Figure out what to do with threaded programs.
 
-CREDITS:
+###CREDITS:
+
 This work was done for the Paradyn Parallel Performance Tools project
 at the University of Wisconsin (http://www.cs.wisc.edu/paradyn/) and
 was initially inspired by the vtimer patch by dadkins@mit.edu and
 bsong@supertech.lcs.mit.edu.
 
-LICENSE:
+###LICENSE:
+
 libhrtime and the hrtime kernel patches can be considered public domain.
 

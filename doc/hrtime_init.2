@@ -1,0 +1,24 @@
+.\" Hey Emacs! This file is -*- nroff -*- source.
+.\"
+.\" This man-page is Copyright (C) 2000 Nick Rasmussen <nick@jive.org>
+.\"
+.TH HRTIME 2 "Release 0.6.1" "Linux" "High-resolution timing"
+.SH NAME
+hrtime_init, hrtime_is_present \- libhrtime administrative functions
+.SH SYNOPSIS
+.nf
+.B #include <hrtime.h>
+.sp
+.BI "int hrtime_init(void);"
+.BI "int hrtime_is_present(void);"
+.fi
+.SH DESCRIPTION
+.IP \fBhrtime_init\fP
+Perform internal libhrtime initialization.  This function must be called
+prior to calling any of the query functions.
+.IP \fBhrtime_is_present\fP
+Returns non-zero if the kernel was compiled with hrtime support.
+.SH AUTHOR
+Nick Rasmussen <nick@jive.org>
+.SH "SEE ALSO"
+.BR get_hrtimen (2)

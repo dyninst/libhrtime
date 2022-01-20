@@ -1,0 +1,9 @@
+AC_INIT(src/hrtime.h)
+AM_INIT_AUTOMAKE(libhrtime,0.6.1)
+AC_PROG_CC
+AM_PROG_LIBTOOL
+AC_SUBST(LIBTOOL_DEPS)
+
+AC_CHECK_HEADER([linux/hrtime.h], [:], AC_MSG_ERROR([Unable to find the kernel support header.]))
+
+AC_OUTPUT(Makefile libhrtime.spec src/Makefile doc/Makefile examples/Makefile patches/Makefile)

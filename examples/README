@@ -1,0 +1,14 @@
+This directory contains some sample programs that use the hrtime library.
+
+print_hrtime	Queries itself and prints out its current high-resolution time
+fork_test	Forks off a child process and prints its timing values
+syscall_timing	Uses the hrtime library to time a system call (getpid)
+query_costs	Computes the cost of calling a libhrtime function
+
+times.*		Sample output from syscall_timing.  As can be seen, enabling
+		CONFIG_HRUSTIME (the system call path timing) adds
+		approximately 100 cycles of overhead to an approximately 300
+		cycle system call.  These measurements were taking on a dual
+		Pentium-III 450 with 256MB of memory.
+
+query_cost.PIII450x2 Sample output from syscall_timing. Same machine as above

@@ -1,0 +1,11 @@
+Untar the latest kernel-source
+cd [kernel source dir]
+patch -p1 < [hrtime patch for given kernel version]
+
+During the configuration process,
+enable
+'Prompt for development and/or incomplete code/drivers' (CONFIG_EXPIREMENTAL)
+and 
+'High-resolution process virtual time support (NEW)' (CONFIG_HRTIME)
+and optionally
+'High-resolution process utime/stime support (NEW)' (CONFIG_HRUSTIME)

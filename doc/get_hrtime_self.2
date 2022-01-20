@@ -1,0 +1,60 @@
+.\" Hey Emacs! This file is -*- nroff -*- source.
+.\"
+.\" This man-page is Copyright (C) 2000 Nick Rasmussen <nick@jive.org>
+.\"
+.TH HRTIME 2 "Release 0.6.1" "Linux" "High-resolution timing"
+.SH NAME
+get_hrtime_self, get_hrvtime_self, get_hrutime_self, get_hrstime_self,
+\- self timing functions
+.SH SYNOPSIS
+.nf
+.B #include <hrtime.h>
+.sp
+.BI "void get_hrtime_self(hrtime_t *" dest ");"
+.BI "void get_hrvtime_self(hrtime_t *" dest ");"
+.BI "void get_hrutime_self(hrtime_t *" dest ");"
+.BI "void get_hrstime_self(hrtime_t *" dest ");"
+.fi
+.SH ARGUMENTS
+.IP \fIdest\fP 1i
+Specifies the location to which the desired timing value should be
+written.  Again, it is the responsibility of the caller to insure that
+\fIdest\fP is non-null.
+.SH DESCRIPTION
+.IP \fBget_hrtime_self\fP
+writes the wall time of the current process, in timestamp counter
+ticks, to the location specified by \fIdest\fP.  \fBhrtime_init\fP
+must be called prior to calling this function.
+.IP \fBget_hrvtime_self\fP
+writes the total virtual time of the current process, in timestamp
+counter ticks, to the location specified by \fIdest\fP.
+\fBhrtime_init\fP must be called prior to calling this function.
+.IP \fBget_hrutime_self\fP
+writes the virtualized user time of the current process, in timestamp
+counter ticks, to the location specified by \fIdest\fP.  This function
+returns an undefined value if the kernel was not configured with
+\fBCONFIG_HRUSTIME\fP, the option enabling additional instrumentation
+on the system call path.  You can check for this at runtime by mapping
+a struct hrtime and looking at \fIhr->has_ustime\fP.
+\fBhrtime_init\fP must be called prior to calling this function.
+.IP \fBget_hrstime_self\fP
+writes the virtualized system time of the current process, in
+timestamp counter ticks, to the location specified by \fIdest\fP.
+This function returns an undefined value if the kernel was not
+configured with \fBCONFIG_HRUSTIME\fP, the option enabling additional
+instrumentation on the system call path.  You can check for this at
+runtime by mapping a struct hrtime and looking at
+\fIhr->has_ustime\fP.  \fBhrtime_init\fP must be called prior to
+calling this function.
+.SH BUGS
+The current implementation is based on the flawed assumption that the
+timestamp counter is incremented once per clock cycle (this is true on
+all current implementations of Intel processors, but not guaranteed in
+the specification).
+
+.SH AUTHOR
+Nick Rasmussen <nick@jive.org>
+.SH "SEE ALSO"
+.BR get_hrtime "(2), " get_hrvtime "(2), " get_hrutime "(2), "
+.BR get_hrstime "(2), " get_hrtime_struct "(2), " free_hrtime_struct "(2), "
+.BR hrtime_init "(2), " times "(2), " gettimeofday (2)

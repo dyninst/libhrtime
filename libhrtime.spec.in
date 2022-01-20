@@ -1,0 +1,63 @@
+%define ver      @VERSION@
+%define rel      1
+%define prefix   @prefix@
+
+Summary: High-resolution process time querying library
+Name: libhrtime
+Version: %ver
+Release: %rel
+Copyright: Public domain
+Group: X11/Libraries
+Source: libhrtime-%{ver}.tar.gz
+BuildRoot: /var/tmp/libhrtime-%{ver}-root
+URL: http://www.cs.wisc.edu/paradyn/libhrtime/
+Docdir: %{prefix}/doc
+Prefix: %prefix
+
+%description
+This library provides cycle accurate interprocess timing queries without
+the overhead of a system call.
+
+%prep
+%setup
+
+if [ ! -f configure ]; then
+  ./bootstrap.sh
+fi
+CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{prefix}
+
+%build
+
+make
+
+%install
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+
+make prefix=$RPM_BUILD_ROOT%{prefix} install
+
+%clean
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-, root, root)
+
+%doc AUTHORS README INSTALL
+%{prefix}/lib/libhrtime.so
+%{prefix}/lib/libhrtime-%{ver}.so
+%{prefix}/lib/libhrtime.la
+%{prefix}/lib/libhrtime.a
+%{prefix}/include/hrtime.h
+%{prefix}/include/hrtime_shadow.h
+%{prefix}/man/man2/get_hrtime_self.2.gz
+%{prefix}/man/man2/hrtime_init.2.gz
+%{prefix}/man/man2/get_hrtime.2.gz
+%{prefix}/man/man2/get_hrtime_struct.2.gz
+
+
+%changelog
+* Wed Jan 31 2001 Nick Rasmussen <nick@jive.org>
++ Re-ordered changelog entries to be in chronological order. lol.
+* Tue Nov 20 2000 Nick Rasmussen <nick@jive.org>
++ Added the files :)
+* Thu Nov 9 2000 Nick Rasmussen <nick@jive.org>
+- Initial spec file.

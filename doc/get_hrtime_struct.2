@@ -1,0 +1,41 @@
+.\" Hey Emacs! This file is -*- nroff -*- source.
+.\"
+.\" This man-page is Copyright (C) 2000 Nick Rasmussen <nick@jive.org>
+.\"
+.TH HRTIME 2 "Release 0.6.1" "Linux" "High-resolution timing"
+.SH NAME
+get_hrtime_struct, free_hrtime_struct \- high-resolution process timing
+.SH SYNOPSIS
+.nf
+.B #include <hrtime.h>
+.sp
+.BI "int hrtime_init();"
+.BI "int get_hrtime_struct(pid_t " pid ", struct hrtime_struct **" dest ");"
+.BI "int free_hrtime_struct(struct hrtime_struct *" hr ");"
+.fi
+.SH ARGUMENTS
+.IP \fIpid\fP 1i
+The pid of the process from which to map the timing values.
+.IP \fIdest\fP 1i
+The pointer to be changed to point to the mapped timing values.
+.IP \fIhr\fP 1i
+A pointer to the htrime structure to be unmapped.
+.SH DESCRIPTION
+.IP \fBhrtime_init\fP
+Perform hrtime library initialization.  This \fBmust\fP be called
+before any process querying function is called.
+.IP \fBget_hrtime_struct\fP
+Maps the timing structure of another process into your address space,
+writing the pointer to the structure into \fIdest\fP.  If an error
+occurs, the return value is non-zero and \fIdest\fP is written with
+NULL.  If \fIpid\fP is zero, the current process' timing values are
+mapped.
+.IP \fBget_hrtime_struct\fP
+Unmaps the timing structure specified by \fIhr\fP from your address
+space.  If an error occurs, the return value is non-zero.
+.SH AUTHOR
+Nick Rasmussen <nick@jive.org>
+.SH "SEE ALSO"
+.BR get_hrtime "(2), " get_hrvtime "(2), " get_hrutime "(2), " get_hrstime (2) 
+.BR get_hrtime_self "(2), " get_hrvtime_self "(2), " get_hrutime_self "(2), "
+.BR get_hrstime_self (2)

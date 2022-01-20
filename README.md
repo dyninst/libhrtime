@@ -1,11 +1,12 @@
 # This project is no longer maintained
 
 
-##libhrtime
+## libhrtime
 
-libhrtime, Version 0.6.1
-High-Resolution Process Timing for the Linux Kernel
-Copyright (C) 2000, Nick Rasmussen <nick@jive.org>
+
+libhrtime, Version 0.6.1  
+High-Resolution Process Timing for the Linux Kernel  
+Copyright (C) 2000, Nick Rasmussen <nick@jive.org>  
 Location: http://www.paradyn.org/projects/legacy/libhrtime/
 
 This patch adds very low-overhead access to high-resolution process virtual
@@ -49,7 +50,7 @@ void get_hrstime(volatile struct hrtime_struct *hr, hrtime_t *dest);
   enabled)
 ```
 
-###TODO/BUGS:
+### TODO/BUGS:
 
 - Run some test cases to see what the cumulative slowdown (in cycles per syscall)
 when CONFIG_HRUSTIME is enabled.
@@ -61,14 +62,14 @@ do all hrtime (wall time) operations with reference to CPU 0.
 
 - Figure out what to do with threaded programs.
 
-###CREDITS:
+### CREDITS:
 
 This work was done for the Paradyn Parallel Performance Tools project
 at the University of Wisconsin (http://www.cs.wisc.edu/paradyn/) and
 was initially inspired by the vtimer patch by dadkins@mit.edu and
 bsong@supertech.lcs.mit.edu.
 
-###LICENSE:
+### LICENSE:
 
 libhrtime and the hrtime kernel patches can be considered public domain.
 
